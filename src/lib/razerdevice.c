@@ -463,7 +463,17 @@ RazerDevices getAllRazerDevices()
         UInt16 productId;
         (*dev)->GetDeviceProduct(dev, &productId);
 
-        RazerDevice newDevice = { .usbDevice = dev, .internalDeviceId = array_index, .productId = productId };
+        int deviceType;
+        if(is_keyboard(dev)) { deviceType = TYPE_KEYBOARD; }
+        else if(is_mouse(dev)) { deviceType = TYPE_MOUSE; }
+        else if(is_mouse_dock(dev)) { deviceType = TYPE_MOUSE_DOCK; }
+        else if(is_mouse_mat(dev)) { deviceType = TYPE_MOUSE_MAT; }
+        else if(is_headphone(dev)) { deviceType = TYPE_HEADPHONE; }
+        else if(is_egpu(dev)) { deviceType = TYPE_EGPU; }
+        else if(is_accessory(dev)) { deviceType = TYPE_ACCESSORY; }
+        else if(is_blade_laptop(dev)) { deviceType = TYPE_BLADE; }
+
+        RazerDevice newDevice = { .usbDevice = dev, .internalDeviceId = array_index, .productId = productId, .deviceType = deviceType };
         razerDevices[array_index] = newDevice;
     }
 

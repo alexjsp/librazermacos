@@ -37,6 +37,7 @@ typedef struct {
     IOUSBDeviceInterface **usbDevice;
     UInt16 productId;
     int internalDeviceId;
+    int deviceType;
 } RazerDevice;
 
 typedef struct {
